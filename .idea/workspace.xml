@@ -438,7 +438,13 @@
       <option name="project" value="LOCAL" />
       <updated>1466095188904</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="nowy plik">
+      <created>1466095210883</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1466095210883</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
