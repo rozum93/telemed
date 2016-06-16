@@ -3,12 +3,12 @@ def pobierz():
 
     cur.execute(
         """
-        SELECT pacjent.id,imie,nazwisko,nazwa FROM uczen,klasa
-        WHERE uczen.klasa_id=klasa.id
+        SELECT pacjent.id,imie,nazwisko,nazwa FROM pacjent, czynnosc
+        WHERE pacjent.czynnosc_id=czynnosc.id
         """)
-    uczniowie = cur.fetchall()
-    for uczen in uczniowie:
-        print uczen['id'], uczen['imie'], uczen['nazwisko'], uczen['nazwa']
-    print ""
+    pacjenci = cur.fetchall()
+    for pacjent in pacjenci:
+        print(pacjent['id'], pacjent['imie'], pacjent['nazwisko'], pacjent['nazwa'])
+    print("")
 
 pobierz()

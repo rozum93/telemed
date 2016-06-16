@@ -1,20 +1,19 @@
 # wstawiamy jeden rekord danych
-cur.execute('INSERT INTO czynnosc VALUES(NULL, ?, ?);', ('1A', 'matematyczny'))
-cur.execute('INSERT INTO czynnosc VALUES(NULL, ?, ?);', ('1B', 'humanistyczny'))
+cur.execute('INSERT INTO czynnosc VALUES(NULL, ?, ?);', ('1', 'bieg'))
+cur.execute('INSERT INTO czynnosc VALUES(NULL, ?, ?);', ('2', 'ćwiczenia'))
 
-# wykonujemy zapytanie SQL, które pobierze id klasy "1A" z tabeli "klasa".
-cur.execute('SELECT id FROM klasa WHERE nazwa = ?', ('1A',))
-klasa_id = cur.fetchone()[0]
+# zapytanie
+cur.execute('SELECT id FROM czynnosc WHERE nazwa = ?', ('1',))
+czynnosc_id = cur.fetchone()[0]
 
-# tupla "uczniowie" zawiera tuple z danymi poszczególnych uczniów
 uczniowie = (
-    (None, 'Tomasz', 'Nowak', klasa_id),
-    (None, 'Jan', 'Kos', klasa_id),
-    (None, 'Piotr', 'Kowalski', klasa_id)
+    (None, 'Tomasz', 'Nowak', czynnosc_id),
+    (None, 'Jan', 'Kos', czynnosc_id),
+    (None, 'Piotr', 'Kowalski', czynnosc_id)
 )
 
 # wstawiamy wiele rekordów
-cur.executemany('INSERT INTO uczen VALUES(?,?,?,?)', uczniowie)
+cur.executemany('INSERT INTO pacjent VALUES(?,?,?,?)', pacjenci)
 
 # zatwierdzamy zmiany w bazie
 con.commit()
