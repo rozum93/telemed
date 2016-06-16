@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e160d5b2-86b0-4422-9d6a-2db4ce5c6f0d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logowanie.py" afterPath="$PROJECT_DIR$/logowanie.py" />
     </list>
     <ignored path="telemed.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -509,12 +508,18 @@
       <option name="project" value="LOCAL" />
       <updated>1466096135732</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="logowanie, które dobrze rokuje, ale jeszxcze nie działa">
+      <created>1466111477566</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1466111477566</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23645833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -553,7 +558,8 @@
     <MESSAGE value="Dodanie Heheszek2" />
     <MESSAGE value="nowy plik" />
     <MESSAGE value="do bazy" />
-    <option name="LAST_COMMIT_MESSAGE" value="do bazy" />
+    <MESSAGE value="logowanie, które dobrze rokuje, ale jeszxcze nie działa" />
+    <option name="LAST_COMMIT_MESSAGE" value="logowanie, które dobrze rokuje, ale jeszxcze nie działa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
