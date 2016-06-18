@@ -542,7 +542,13 @@
       <option name="project" value="LOCAL" />
       <updated>1466256162937</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="pliki static">
+      <created>1466256261592</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1466256261592</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -588,7 +594,8 @@
     <MESSAGE value="nowy plik" />
     <MESSAGE value="do bazy" />
     <MESSAGE value="logowanie, które dobrze rokuje, ale jeszxcze nie działa" />
-    <option name="LAST_COMMIT_MESSAGE" value="logowanie, które dobrze rokuje, ale jeszxcze nie działa" />
+    <MESSAGE value="pliki static" />
+    <option name="LAST_COMMIT_MESSAGE" value="pliki static" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
