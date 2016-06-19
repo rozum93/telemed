@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header"> Wybierz i dodaj plik do bazy</div>
+<form action="../cgi-bin/mycgi.pl" method="post" enctype="multipart/form-data">
+    <div class="container">
+        <div class="form-group">
+            </br>
+            <input type="file" name="file">
+            </br>
+            <input class="btn btn-default" type="submit" value="Dodaj">
+        </div>
+
+</form>
+
+
+{% endblock %}
