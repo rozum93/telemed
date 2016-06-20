@@ -19,20 +19,18 @@ class Data(signals_db.Model):
     id = signals_db.Column(signals_db.Integer, primary_key=True)
 
     # tam jest jakieś patient_id, które jest tekstem, więc tak to dodałam
-    patient_id = signals_db.Column(signals_db.String)
+    patient_id = signals_db.Column(signals_db.Integer)
     name = signals_db.Column(signals_db.String)
     surname = signals_db.Column(signals_db.String)
     activity = signals_db.Column(signals_db.String)
-    sampling_freq = signals_db.Column(signals_db.Integer)
 
     signals = signals_db.relationship("Signal", backref="data", lazy="dynamic")
 
-    def __init__(self, patient_id, name, surname, activity, sampling_freq):
+    def __init__(self, patient_id, name, surname, activity):
         self.patient_id=patient_id
         self.name=name
         self.surname=surname
         self.activity=activity
-        self.sampling_freq=sampling_freq
 
 class Signal(signals_db.Model):
     __tablename__ = 'signal'
@@ -56,12 +54,20 @@ signals_db.create_all()
 def welcome():
     return render_template('welcome.html')
 
-@app.route("/baza")
+@app.route("/baza", methods=['GET', 'POST'])
 def baza():
-    data = signals_db.session.query(Data).all()
-    signals = signals_db.session.query(Signal).all()
-    for element in signals:
-        print(str(element.id) + "\t" + str(element.data_id) + "\t" + str(element.time) + "\t" + str(element.aX) + "\t" + str(element.aY) + "\t" + str(element.aZ))
+    if request.method=='GET':
+        data = signals_db.session.query(Data).all()
+    else:
+        to_find = request.form['enter_string']
+        if request.form['search_by']=='activity':
+            data = Data.query.filter(Data.activity.ilike('%'+to_find+'%'))
+        elif request.form['search_by']=='patient_id':
+            data = Data.query.filter(Data.patient_id==to_find)
+        elif request.form['search_by']=='surname':
+            data = Data.query.filter(Data.surname.ilike('%'+to_find+'%'))
+
+
     return render_template('baza.html', data=data)
 
 @app.route("/modify")
@@ -79,7 +85,7 @@ def save():
     header = file.readline().decode('utf-8').split()
 
     # wpisywanie nagłówka do bazy - sampling frequency na razie stałe, bo nie wiem jakie było
-    patient_data = Data(header[0], header[2], header[3], header[1], 0.5)
+    patient_data = Data(header[0], header[2], header[3], header[1])
     signals_db.session.add(patient_data)
     signals_db.session.commit()
 

@@ -2,26 +2,48 @@
 
 {% block content %}
 
-<div class="page-header"> Baza danych </div>
+<div class="page-header">Wyszukaj w bazie</div>
+<form action="/baza" method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="search_by">Wyszukaj po:</label>
+            <select class="form-control" id="search_by" name="search_by">
+                <option value="activity">czynność</option>
+                <option value="patient_id">ID pacjenta</option>
+                <option value="surname">nazwisko pacjenta</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="enter_string">Wpisz wyszukiwaną frazę:</label>
+            <input class="form-control" type="text" id="enter_string" name="enter_string">
+        </div>
+        <div class="col-md-4">
+            <br>
+            <button type="submit" class="btn btn-primary">Wyszukaj</button>
+        </div>
+    </div>
+</form>
+
+<div class="page-header">Dane z bazy</div>
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
-                <th>patient_id</th>
-                <th>name</th>
-                <th>surname</th>
-                <th>activity</th>
-                <th>sampling_freq</th>
+                <th>numer rekordu</th>
+                <th>ID pacjenta</th>
+                <th>imię</th>
+                <th>nazwisko</th>
+                <th>czynność</th>
             </tr>
         </thead>
         <tbody>
         {% for element in data %}
         <tr>
             <th>{{ element.id }} </th>
+            <th>{{element.patient_id}}</th>
             <th>{{ element.name }}</th>
             <th>{{ element.surname }}</th>
             <th>{{ element.activity }}</th>
-            <th>{{ element.sampling_freq }}</th>
         </tr>
         {% endfor %}
         </tbody>
