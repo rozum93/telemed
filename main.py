@@ -23,16 +23,16 @@ class Data(signals_db.Model):
     name = signals_db.Column(signals_db.String)
     surname = signals_db.Column(signals_db.String)
     activity = signals_db.Column(signals_db.String)
-    samplig_freq = signals_db.Column(signals_db.Integer)
+    sampling_freq = signals_db.Column(signals_db.Integer)
 
     signals = signals_db.relationship("Signal", backref="data", lazy="dynamic")
 
-    def __init__(self, patient_id, name, surname, activity, samplig_freq):
+    def __init__(self, patient_id, name, surname, activity, sampling_freq):
         self.patient_id=patient_id
         self.name=name
         self.surname=surname
         self.activity=activity
-        self.samplig_freq=samplig_freq
+        self.sampling_freq=sampling_freq
 
 class Signal(signals_db.Model):
     __tablename__ = 'signal'
@@ -58,7 +58,11 @@ def welcome():
 
 @app.route("/baza")
 def baza():
-    return render_template('baza.html')
+    data = signals_db.session.query(Data).all()
+    signals = signals_db.session.query(Signal).all()
+    for element in signals:
+        print(str(element.id) + "\t" + str(element.data_id) + "\t" + str(element.time) + "\t" + str(element.aX) + "\t" + str(element.aY) + "\t" + str(element.aZ))
+    return render_template('baza.html', data=data)
 
 @app.route("/modify")
 def modify():
@@ -68,30 +72,30 @@ def modify():
 def add():
     return render_template('add.html')
 
-@app.route("/save", methods=['POST'])
+@app.route("/save", methods=['GET', 'POST'])
 def save():
     file=request.files['file']
-    fn=os.path.basename(file.filename)
-    print(fn)
-    #file_object = open('44_DANE.TXT')
     # nagłówek
-    #header = file_data.readline().split()
+    header = file.readline().decode('utf-8').split()
 
     # wpisywanie nagłówka do bazy - sampling frequency na razie stałe, bo nie wiem jakie było
-    #patient_data = Data(header[0], header[2], header[3], header[1], 0.5)
-    #signals_db.session.add(patient_data)
-    #signals_db.session.commit()
+    patient_data = Data(header[0], header[2], header[3], header[1], 0.5)
+    signals_db.session.add(patient_data)
+    signals_db.session.commit()
 
     # pozbywamy się linijki "CZAS aX aY aZ" i pierwszego rekordu niestety :(  bo jest w tej samej linijce. to trzeba poprawić
-    #print(file_data.readline())
+    print(file.readline())
 
     # czytanie sygnału
-    #for line in file_data:
-    #    signal = line.split()
-    #    element = Signal(patient_data.id, signal[0], signal[1], signal[2], signal[3])
-    #    signals_db.session.add(element)
+    for line in file:
+        signal = line.decode('utf-8').split()
+        if signal != []:
+            element = Signal(patient_data.id, signal[0], signal[1], signal[2], signal[3])
+            signals_db.session.add(element)
+        else:
+            break
 
-    # signals_db.session.commit()
+    signals_db.session.commit()
     return redirect('/')
 
 
