@@ -131,6 +131,7 @@ def signal():
         aZ = aZ+[element.aZ]
 
 
+
     meanX = round(numpy.mean(aX),2)
     meanY = round(numpy.mean(aY),2)
     meanZ = round(numpy.mean(aZ),2)
@@ -138,8 +139,6 @@ def signal():
     stdX = round(numpy.std(aX),2)
     stdY = round(numpy.std(aX),2)
     stdZ = round(numpy.std(aX),2)
-
-
 
     graphs = [
         dict(
@@ -187,6 +186,9 @@ def signal():
                            stdX = stdX,
                            stdY = stdY,
                            stdZ = stdZ,
+                           lenX = round(len(aX)/250,2),
+                           lenY = round(len(aY)/250,2),
+                           lenZ = round(len(aZ)/250,2),
                                         )
 
 app.run(debug=True)
