@@ -111,8 +111,8 @@ def save():
     signals_db.session.commit()
     return redirect('/')
 
-@app.route("/test", methods=['POST'])
-def test():
+@app.route("/signal", methods=['POST'])
+def signal():
 
     rng = pd.date_range('1/1/2011', periods=7500, freq='H')
     ts = pd.Series(np.random.randn(len(rng)), index=rng)
@@ -166,7 +166,7 @@ def test():
     # objects to their JSON equivalents
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
 
-    return render_template('test.html',
+    return render_template('signal.html',
                            ids=ids,
                            graphJSON=graphJSON)
 
