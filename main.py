@@ -25,8 +25,6 @@ signals_db = SQLAlchemy(app)
 class Data(signals_db.Model):
     __tablename__ = 'data'
     id = signals_db.Column(signals_db.Integer, primary_key=True)
-
-    # tam jest jakieś patient_id, które jest tekstem, więc tak to dodałam
     patient_id = signals_db.Column(signals_db.Integer)
     name = signals_db.Column(signals_db.String)
     surname = signals_db.Column(signals_db.String)
