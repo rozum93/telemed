@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="page-header">Dane do modyfikacji</div>
+<div class="page-header"><b>Instrukcja</b></div>
+        Jeżeli chcesz zmienić pole w wybranym wierszu to wpisz nową wartość w polu poniżej, a pozostałe pozostaw puste. <br>
+<div class="page-header"><b>Dane do modyfikacji</b></div>
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -24,7 +25,7 @@
     </table>
 </div>
 
-<div class="page-header">Edycja</div>
+<div class="page-header"><b>Edycja</b></div>
 <form action="/save_changes" method="post">
     <div class="row">
         <div class="col-md-3">
