@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 import statistics
 from datetime import datetime
 import cgi
+import numpy
 
 import json
 import plotly
@@ -129,6 +130,17 @@ def signal():
         aY = aY+[element.aY]
         aZ = aZ+[element.aZ]
 
+
+    meanX = round(numpy.mean(aX),2)
+    meanY = round(numpy.mean(aY),2)
+    meanZ = round(numpy.mean(aZ),2)
+
+    stdX = round(numpy.std(aX),2)
+    stdY = round(numpy.std(aX),2)
+    stdZ = round(numpy.std(aX),2)
+
+
+
     graphs = [
         dict(
             data=[
@@ -168,6 +180,13 @@ def signal():
 
     return render_template('signal.html',
                            ids=ids,
-                           graphJSON=graphJSON)
+                           graphJSON=graphJSON,
+                           meanX = meanX,
+                           meanY = meanY,
+                           meanZ = meanZ,
+                           stdX = stdX,
+                           stdY = stdY,
+                           stdZ = stdZ
+                                        )
 
 app.run(debug=True)
