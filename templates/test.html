@@ -2,11 +2,51 @@
 
 {% block content %}
 
-<div class="page-header">Wyświetlanie sygnału</div>
+<div class="page-header"><h4>Przeglądanie sygnału</h4></div>
 
     {% for id in ids %}
         <div id="{{id}}"></div>
     {% endfor %}
+
+<div class="page-header"><h4>Parametry sygnału</h4></div>
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Parametr</th>
+                <th>Sygnał w osi X</th>
+                <th>Sygnał w osi Y</th>
+                <th>Sygnał w osi Z</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>Czas trwania:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Średnia wartość:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Odchylenie standardowe:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Pozycja:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
     <footer>
     <!-- D3.js -->
