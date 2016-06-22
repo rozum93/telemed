@@ -2,9 +2,16 @@ import os
 from flask import Flask, render_template, redirect, request,url_for
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
 import statistics
+from datetime import datetime
 import cgi
+
+import json
+import plotly
+
+import pandas as pd
+import numpy as np
+
 
 
 app=Flask(__name__)
@@ -104,7 +111,63 @@ def save():
     signals_db.session.commit()
     return redirect('/')
 
+@app.route("/test")
+def test():
 
+    rng = pd.date_range('1/1/2011', periods=7500, freq='H')
+    ts = pd.Series(np.random.randn(len(rng)), index=rng)
 
+    signals = Signal.query.filter(Signal.data_id==1)
+    time = []
+    aX = []
+    aY = []
+    aZ = []
+
+    for element in signals:
+        time = time+[element.time]
+        aX = aX+[element.aX]
+        aY = aY+[element.aY]
+        aZ = aZ+[element.aZ]
+
+    graphs = [
+        dict(
+            data=[
+                dict(
+                    x=time,
+                    y=aX,
+                    type='scatter',
+                    name='przyspieszenie w osi X'
+                ),
+                dict(
+                    x=time,
+                    y=aY,
+                    type='scatter',
+                    name='przyspieszenie w osi Y'
+                ),
+                dict(
+                    x=time,
+                    y=aZ,
+                    type='scatter',
+                    name='przyspieszenie w osi Z'
+                )
+            ],
+            layout=dict(
+                title='Wykres przyspieszenia w trzech osiach'
+            )
+        ),
+    ]
+
+    # Add "ids" to each of the graphs to pass up to the client
+    # for templating
+    ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
+
+    # Convert the figures to JSON
+    # PlotlyJSONEncoder appropriately converts pandas, datetime, etc
+    # objects to their JSON equivalents
+    graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return render_template('test.html',
+                           ids=ids,
+                           graphJSON=graphJSON)
 
 app.run(debug=True)
