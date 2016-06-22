@@ -186,7 +186,7 @@ def signal():
                            meanZ = meanZ,
                            stdX = stdX,
                            stdY = stdY,
-                           stdZ = stdZ
+                           stdZ = stdZ,
                                         )
 
 app.run(debug=True)
