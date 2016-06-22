@@ -46,8 +46,10 @@
             <th>{{ element.name }}</th>
             <th>{{ element.surname }}</th>
             <th>{{ element.activity }}</th>
-        <th>przycisk</th>
-        <th>przycisk</th>
+            <th><form action="/test" method="post">
+                    <button type="submit" name="id" value="{{ element.id }}" class="btn btn-primary">Wyświetl</button>
+                </form></th>
+            <th>przycisk</th>
         </tr>
         {% endfor %}
         </tbody>

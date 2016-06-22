@@ -65,16 +65,6 @@ def welcome():
 def baza():
     if request.method=='GET':
         data = signals_db.session.query(Data).all()
-
-        signals = Signal.query.filter(Signal.data_id==1)
-        time=[]
-        aX=[]
-        for element in signals:
-            time=time+[element.time]
-            aX=aX+[element.aX]
-        print(time)
-        print(aX)
-
     else:
         to_find = request.form['enter_string']
         if request.form['search_by']=='activity':
@@ -121,13 +111,13 @@ def save():
     signals_db.session.commit()
     return redirect('/')
 
-@app.route("/test")
+@app.route("/test", methods=['POST'])
 def test():
 
     rng = pd.date_range('1/1/2011', periods=7500, freq='H')
     ts = pd.Series(np.random.randn(len(rng)), index=rng)
 
-    signals = Signal.query.filter(Signal.data_id==1)
+    signals = Signal.query.filter(Signal.data_id==request.form['id'])
     time = []
     aX = []
     aY = []
