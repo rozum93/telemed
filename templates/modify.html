@@ -2,6 +2,49 @@
 
 {% block content %}
 
-<div class="page-header">Modyfikacje</div>
+<div class="page-header">Dane do modyfikacji</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID pacjenta</th>
+                <th>imię</th>
+                <th>nazwisko</th>
+                <th>czynność</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>{{data.patient_id}}</th>
+            <th>{{data.name}}</th>
+            <th>{{data.surname}}</th>
+            <th>{{data.activity}}</th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="page-header">Edycja</div>
+<form action="/save_changes" method="post">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="patient_id">ID pacjenta:</label>
+            <input class="form-control" type="text" id="patient_id" name="patient_id">
+        </div>
+        <div class="col-md-3">
+            <label for="name">Imię:</label>
+            <input class="form-control" type="text" id="name" name="name">
+        </div>
+        <div class="col-md-3">
+            <label for="surname">Nazwisko:</label>
+            <input class="form-control" type="text" id="surname" name="surname">
+        </div>
+        <div class="col-md-3">
+            <label for="activity">Czynność:</label>
+            <input class="form-control" type="text" id="activity" name="activity">
+        </div>
+    </div> <br>
+     <button type="submit" name="id" value="{{ data.id }}" class="btn btn-primary">Zatwierdź zmiany</button>
+</form>
 
 {% endblock %}

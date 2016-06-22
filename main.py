@@ -78,9 +78,26 @@ def baza():
 
     return render_template('baza.html', data=data)
 
-@app.route("/modify")
+@app.route("/modify", methods=['POST'])
 def modify():
-    return render_template('modify.html')
+    data = Data.query.filter(Data.id==request.form['id'])
+    data=data.first()
+    return render_template('modify.html', data=data)
+
+@app.route("/save_changes", methods=['POST'])
+def save_changes():
+    data = Data.query.filter(Data.id==request.form['id'])
+    data = data.first()
+    if(request.form['patient_id']!=""):
+        data.patient_id=request.form['patient_id']
+    if(request.form['name']!=""):
+        data.name=request.form['name'].upper()
+    if(request.form['surname']!=""):
+        data.surname=request.form['surname'].upper()
+    if(request.form['activity']!=""):
+        data.activity=request.form['activity'].upper()
+    signals_db.session.commit()
+    return render_template('changed.html', data=data)
 
 @app.route("/add")
 def add():

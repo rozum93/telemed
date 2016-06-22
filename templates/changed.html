@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">Zmodyfikowane dane</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID pacjenta</th>
+                <th>imię</th>
+                <th>nazwisko</th>
+                <th>czynność</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>{{data.patient_id}}</th>
+            <th>{{data.name}}</th>
+            <th>{{data.surname}}</th>
+            <th>{{data.activity}}</th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<form action="/baza" method="get">
+    <button type="submit" class="btn btn-primary">OK</button>
+</form>
+{% endblock %}
