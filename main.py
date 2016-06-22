@@ -109,13 +109,11 @@ def save():
     # nagłówek
     header = file.readline().decode('utf-8').split()
 
-    # wpisywanie nagłówka do bazy - sampling frequency na razie stałe, bo nie wiem jakie było
     patient_data = Data(header[0], header[2], header[3], header[1])
     signals_db.session.add(patient_data)
     signals_db.session.commit()
 
-    # pozbywamy się linijki "CZAS aX aY aZ" i pierwszego rekordu niestety :(  bo jest w tej samej linijce. to trzeba poprawić
-    print(file.readline())
+    file.readline()
 
     # czytanie sygnału
     for line in file:
