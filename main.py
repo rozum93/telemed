@@ -101,6 +101,19 @@ def save_changes():
 def add():
     return render_template('add.html')
 
+@app.route("/download", methods = ['POST'])
+def download():
+    data = Data.query.filter(Data.id==request.form['id'])
+    signal = Signal.query.filter(Signal.data_id==request.form['id'])
+    data = data.first()
+    input = str(data.patient_id) + "," + data.activity + "," + data.name + "," + data.surname + "\nCZAS,aX,aY,taZ\n"
+    for element in signal:
+        input = input + str(element.time) + "," + str(element.aX) +"," + str(element.aY) + "," + str(element.aZ) + "\n"
+    f = open(data.activity.lower() + "_" + data.name.lower() + "_" + data.surname.lower() + '.csv', 'w')
+    f.write(input)
+    f.close()
+    return redirect('/baza')
+
 @app.route("/save", methods=['GET', 'POST'])
 def save():
     file=request.files['file']
